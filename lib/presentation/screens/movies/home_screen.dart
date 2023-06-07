@@ -12,6 +12,9 @@ class HomeScreen extends StatelessWidget {
       appBar: GlobalAppBar(
         appBarTitle: title,
       ),
+      body: Center(
+        child: Text('Center'),
+      ),
     );
   }
 }
