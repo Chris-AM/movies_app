@@ -1,4 +1,7 @@
+//* Flutter Imports
 import 'package:flutter/material.dart';
+//* Own Imports
+import 'package:movies_app/config/constants/environment.dart';
 import 'package:movies_app/presentation/screens/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -13,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         appBarTitle: title,
       ),
       body: Center(
-        child: Text('Center'),
+        child: Text(Environment.tmdbKey),
       ),
     );
   }
