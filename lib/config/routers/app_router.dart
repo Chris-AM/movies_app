@@ -9,5 +9,10 @@ final appRouter = GoRouter(
       name: HomeScreen.name,
       builder: (context, state) => const HomeScreen(),
     ),
+    GoRoute(
+      path: '/movie_language_selection',
+      name: MovieLanguageSelectionScreen.name,
+      builder: (context, state) => const MovieLanguageSelectionScreen(),
+    )
   ],
 );
