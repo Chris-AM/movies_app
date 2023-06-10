@@ -1,7 +1,7 @@
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/infrastructure/models/moviedb/moviedb_result.dart';
 
-class MovieMapper {
+class TMDBMapper {
   static MovieEntity movieDBToEntity(MovieDBResponse response) => MovieEntity(
         adult: response.adult,
         backdropPath: response.backdropPath != ''

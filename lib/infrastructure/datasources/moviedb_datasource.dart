@@ -29,7 +29,7 @@ class MovieDBDataSource extends MoviesDataSource {
     final TmdbResponse tmdbResponse = TmdbResponse.fromJson(response.data);
     final List<MovieEntity> movies = tmdbResponse.results
         .where((movieDB) => movieDB.posterPath != 'no-poster')
-        .map((movieDB) => MovieMapper.movieDBToEntity(movieDB))
+        .map((movieDB) => TMDBMapper.movieDBToEntity(movieDB))
         .toList();
     return movies;
   }
