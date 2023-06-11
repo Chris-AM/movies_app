@@ -31,9 +31,11 @@ class MoviesNotifier extends StateNotifier<List<MovieEntity>> {
   }
 
   Future<void> setMoviesLanguage(int moviesLanguageIndex) async {
-    moviesLanguageIndex = currentIndex;
-    final List<MovieEntity> languagesToShow =
+    currentIndex = moviesLanguageIndex;
+    print('movies provider, moviesLanguageIndex $moviesLanguageIndex');
+    print('movies provider, currentIndex $currentIndex');
+    final List<MovieEntity> movieLanguagesToDisplay =
         await fetchMoreMovies(index: currentIndex);
-    state = [...state, ...languagesToShow];
+    state = [...movieLanguagesToDisplay];
   }
 }

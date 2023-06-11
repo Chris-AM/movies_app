@@ -9,8 +9,5 @@ final Provider<Map<String, String>> moviesLanguagesProvider =
 );
 
 final StateProvider<int> moviesLanguageIndexProvider = StateProvider<int>(
-  (ref) {
-    print('index in the state: $moviesLanguageIndex');
-    return moviesLanguageIndex;
-  },
+  (ref) => moviesLanguageIndex,
 );
