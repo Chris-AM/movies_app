@@ -4,3 +4,5 @@ Map<String, String> moviesLanguagesMapper = <String, String>{
   'Español Latino': 'es-MX',
   'Français': 'fr-FR',
 };
+
+int moviesLanguageIndex = 0;

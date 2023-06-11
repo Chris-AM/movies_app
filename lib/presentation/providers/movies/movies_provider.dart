@@ -11,10 +11,12 @@ final StateNotifierProvider<MoviesNotifier, List<MovieEntity>>
 
 typedef MovieCallBack = Future<List<MovieEntity>> Function({
   int page,
+  int index,
 });
 
 class MoviesNotifier extends StateNotifier<List<MovieEntity>> {
   int currentPage = 0;
+  int currentIndex = 0;
   MovieCallBack fetchMoreMovies;
   MoviesNotifier({
     required this.fetchMoreMovies,
@@ -22,9 +24,16 @@ class MoviesNotifier extends StateNotifier<List<MovieEntity>> {
 
   Future<void> loadNextPage() async {
     currentPage++;
-    final List<MovieEntity> movies = await fetchMoreMovies(
+    final List<MovieEntity> pageMovies = await fetchMoreMovies(
       page: currentPage,
     );
-    state = [...state, ...movies];
+    state = [...state, ...pageMovies];
+  }
+
+  Future<void> setMoviesLanguage(int moviesLanguageIndex) async {
+    moviesLanguageIndex = currentIndex;
+    final List<MovieEntity> languagesToShow =
+        await fetchMoreMovies(index: currentIndex);
+    state = [...state, ...languagesToShow];
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movies_app/presentation/providers/movies/movies_languages_provider.dart';
+import 'package:movies_app/presentation/providers/movies/movies_provider.dart';
+import 'package:movies_app/presentation/providers/movies/movies_repository_provider.dart';
 import 'package:movies_app/presentation/screens/widgets/widgets.dart';
 
 class MovieLanguageSelectionScreen extends StatelessWidget {
@@ -45,6 +47,9 @@ class _LanguageSelectionView extends ConsumerWidget {
           value: index,
           onChanged: (value) {
             ref.read(moviesLanguageIndexProvider.notifier).state = index;
+            ref
+                .read(nowPlayingMoviesProvider.notifier)
+                .setMoviesLanguage(selectedLanguage);
           },
         );
       },
