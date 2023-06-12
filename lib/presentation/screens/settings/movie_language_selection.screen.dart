@@ -1,5 +1,9 @@
+//* Dart/Flutter imports
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+//* Own Imports
 import 'package:movies_app/presentation/providers/movies/movies_languages_provider.dart';
 import 'package:movies_app/presentation/providers/movies/movies_provider.dart';
 
@@ -17,6 +21,14 @@ class MovieLanguageSelectionScreen extends StatelessWidget {
         child: _LanguageSelectionView(
           title: title,
         ), // Display the language selection view
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.pop();
+        },
+        child: Platform.isIOS
+            ? const Icon(Icons.arrow_back_ios_new_rounded)
+            : const Icon(Icons.arrow_back_rounded),
       ),
     );
   }

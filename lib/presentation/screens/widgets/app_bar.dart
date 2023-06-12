@@ -58,7 +58,7 @@ class _IconsRow extends StatelessWidget {
       children: [
         IconButton(
           onPressed: () {
-            context.go('/movie_language_selection');
+            context.push('/movie_language_selection');
           },
           icon: showSettingsButton
               ? const Icon(
