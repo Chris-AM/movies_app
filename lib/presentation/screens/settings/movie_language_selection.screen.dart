@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movies_app/presentation/providers/movies/movies_languages_provider.dart';
 import 'package:movies_app/presentation/providers/movies/movies_provider.dart';
-import 'package:movies_app/presentation/screens/widgets/widgets.dart';
 
 // This is a stateless widget that displays the movie language selection screen
 class MovieLanguageSelectionScreen extends StatelessWidget {
@@ -14,10 +13,6 @@ class MovieLanguageSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GlobalAppBar(
-        appBarTitle: title,
-        showSettingsButton: false,
-      ), // Display the app bar with the title and hide the settings button
       body: Center(
         child: _LanguageSelectionView(
           title: title,
@@ -44,18 +39,20 @@ class _LanguageSelectionView extends ConsumerWidget {
       itemCount: languagesMapState
           .length, // Set the number of items to the length of the map
       itemBuilder: (context, index) {
-        final entries = languagesMapState.entries.toList()[
-            index]; // Get the language name and code at the current index
+        // Get the language name and code at the current index
+        final entries = languagesMapState.entries.toList()[index];
         return LanguageRadioListTile(
           languageNames: entries.key, // Set the language name
           codes: entries.value, // Set the language code
           selectedLanguage: selectedLanguage, // Set the selected language index
           value: index, // Set the index of the language
           onChanged: (value) {
-            ref.read(moviesLanguageIndexProvider.notifier).state =
-                index; // Update the selected language index in the state
-            ref.read(nowPlayingMoviesProvider.notifier).setMoviesLanguage(
-                index); // Update the movies state with the selected language
+            // Update the selected language index in the state
+            ref.read(moviesLanguageIndexProvider.notifier).state = index;
+            // Update the movies state with the selected language
+            ref
+                .read(nowPlayingMoviesProvider.notifier)
+                .setMoviesLanguage(index);
           },
         );
       },

@@ -9,18 +9,13 @@ import 'package:movies_app/presentation/screens/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   static String name = 'Home_Screen';
-  final String title = 'Movies App';
-  final String language = 'es-MX';
+  static String title = 'Movies App';
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: GlobalAppBar(
-        showSettingsButton: true,
-        appBarTitle: title,
-      ),
-      body: const _HomeView(),
+    return const Scaffold(
+      body: _HomeView(),
     );
   }
 }
@@ -43,14 +38,21 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   Widget build(BuildContext context) {
     final List<MovieEntity> nowPlayingMovies =
         ref.watch(nowPlayingMoviesProvider);
-    return ListView.builder(
-      itemCount: nowPlayingMovies.length,
-      itemBuilder: (context, index) {
-        final movie = nowPlayingMovies[index];
-        return ListTile(
-          title: Text(movie.title),
-        );
-      },
+    return Column(
+      children: [
+        GlobalAppBar(appBarTitle: HomeScreen.title, showSettingsButton: true),
+        Expanded(
+          child: ListView.builder(
+            itemCount: nowPlayingMovies.length,
+            itemBuilder: (context, index) {
+              final movie = nowPlayingMovies[index];
+              return ListTile(
+                title: Text(movie.title),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

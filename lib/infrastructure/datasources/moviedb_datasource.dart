@@ -26,8 +26,6 @@ class MovieDBDataSource extends MoviesDataSource {
         'language': moviesLanguagesMapper.values.toList()[index],
       },
     );
-    print('real url: ${response.realUri}');
-    print('index at ds: $index');
     final TmdbResponse tmdbResponse = TmdbResponse.fromJson(response.data);
     final List<MovieEntity> movies = tmdbResponse.results
         .where((movieDB) => movieDB.posterPath != 'no-poster')
