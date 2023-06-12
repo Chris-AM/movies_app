@@ -8,6 +8,7 @@ final Provider<Map<String, String>> moviesLanguagesProvider =
   (ref) => moviesLanguagesMapper,
 );
 
+// This provider manages the selected language index of the movies state
 final StateProvider<int> moviesLanguageIndexProvider = StateProvider<int>(
-  (ref) => moviesLanguageIndex,
+  (ref) => moviesLanguageIndex, // The initial selected language index
 );

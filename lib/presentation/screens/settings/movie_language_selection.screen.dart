@@ -2,57 +2,94 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movies_app/presentation/providers/movies/movies_languages_provider.dart';
 import 'package:movies_app/presentation/providers/movies/movies_provider.dart';
-import 'package:movies_app/presentation/providers/movies/movies_repository_provider.dart';
 import 'package:movies_app/presentation/screens/widgets/widgets.dart';
 
+// This is a stateless widget that displays the movie language selection screen
 class MovieLanguageSelectionScreen extends StatelessWidget {
-  static const String name = 'movie_language_selection';
-  final String title = 'Movie Language Selection';
+  static const String name =
+      'movie_language_selection'; // The name of the screen
+  final String title = 'Movie Language Selection'; // The title of the screen
   const MovieLanguageSelectionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GlobalAppBar(appBarTitle: title, showSettingsButton: false),
+      appBar: GlobalAppBar(
+        appBarTitle: title,
+        showSettingsButton: false,
+      ), // Display the app bar with the title and hide the settings button
       body: Center(
-        child: _LanguageSelectionView(title: title),
+        child: _LanguageSelectionView(
+          title: title,
+        ), // Display the language selection view
       ),
     );
   }
 }
 
+// This is a consumer widget that displays the language selection view
 class _LanguageSelectionView extends ConsumerWidget {
-  final String title;
+  final String title; // The title of the screen
   const _LanguageSelectionView({
     required this.title,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Map<String, String> languagesMapState =
-        ref.watch(moviesLanguagesProvider);
-    final int selectedLanguage = ref.watch(moviesLanguageIndexProvider);
-    print(
-      'states at view: { selectedLanguage:  $selectedLanguage }',
-    );
+    final Map<String, String> languagesMapState = ref.watch(
+        moviesLanguagesProvider); // Get the map of language names to codes from the state
+    final int selectedLanguage = ref.watch(
+        moviesLanguageIndexProvider); // Get the selected language index from the state
     return ListView.builder(
-      itemCount: languagesMapState.length,
+      itemCount: languagesMapState
+          .length, // Set the number of items to the length of the map
       itemBuilder: (context, index) {
-        final String languagesNames = languagesMapState.keys.toList()[index];
-        final String languagesCodes = languagesMapState.values.toList()[index];
-        return RadioListTile(
-          title: Text(languagesNames),
-          subtitle: Text(languagesCodes),
-          groupValue: selectedLanguage,
-          value: index,
+        final entries = languagesMapState.entries.toList()[
+            index]; // Get the language name and code at the current index
+        return LanguageRadioListTile(
+          languageNames: entries.key, // Set the language name
+          codes: entries.value, // Set the language code
+          selectedLanguage: selectedLanguage, // Set the selected language index
+          value: index, // Set the index of the language
           onChanged: (value) {
-            ref.read(moviesLanguageIndexProvider.notifier).state = index;
-            ref
-                .read(nowPlayingMoviesProvider.notifier)
-                .setMoviesLanguage(index);
+            ref.read(moviesLanguageIndexProvider.notifier).state =
+                index; // Update the selected language index in the state
+            ref.read(nowPlayingMoviesProvider.notifier).setMoviesLanguage(
+                index); // Update the movies state with the selected language
           },
         );
       },
+    );
+  }
+}
+
+// This is a stateless widget that displays a radio button for a language
+class LanguageRadioListTile extends StatelessWidget {
+  final int selectedLanguage; // The currently selected language index
+  final String languageNames; // The name of the language
+  final String codes; // The code of the language
+  final int value; // The index of the language
+  final Function(int?)
+      onChanged; // The callback function when the language is changed
+
+  const LanguageRadioListTile({
+    super.key,
+    required this.selectedLanguage,
+    required this.languageNames,
+    required this.codes,
+    required this.value,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return RadioListTile(
+      title: Text(languageNames), // Display the language name
+      subtitle: Text(codes), // Display the language code
+      groupValue: selectedLanguage, // Set the currently selected language index
+      value: value, // Set the index of the language
+      onChanged:
+          onChanged, // Set the callback function when the language is changed
     );
   }
 }
