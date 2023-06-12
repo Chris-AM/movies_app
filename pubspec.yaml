@@ -9,6 +9,8 @@ version: 1.0.0+1
 environment:
   sdk: '>=2.19.6 <3.0.0'
 dependencies:
+  animate_do: ^3.0.2
+  card_swiper: ^2.0.4
   cupertino_icons: ^1.0.2
   dio: ^5.2.0+1
   flutter:

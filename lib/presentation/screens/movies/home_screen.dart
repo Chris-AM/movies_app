@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //* Own Imports
-import 'package:movies_app/config/constants/environment.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/presentation/providers/movies/movies_provider.dart';
 import 'package:movies_app/presentation/screens/widgets/widgets.dart';
+import 'package:movies_app/presentation/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   static String name = 'Home_Screen';
@@ -40,18 +40,11 @@ class _HomeViewState extends ConsumerState<_HomeView> {
         ref.watch(nowPlayingMoviesProvider);
     return Column(
       children: [
-        GlobalAppBar(appBarTitle: HomeScreen.title, showSettingsButton: true),
-        Expanded(
-          child: ListView.builder(
-            itemCount: nowPlayingMovies.length,
-            itemBuilder: (context, index) {
-              final movie = nowPlayingMovies[index];
-              return ListTile(
-                title: Text(movie.title),
-              );
-            },
-          ),
+        GlobalAppBar(
+          appBarTitle: HomeScreen.title,
+          showSettingsButton: true,
         ),
+        MoviesSlideshow(movies: nowPlayingMovies),
       ],
     );
   }
