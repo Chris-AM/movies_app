@@ -24,9 +24,10 @@ typedef MovieCallBack = Future<List<MovieEntity>> Function({
 
 // This is a state notifier that manages the state of the movies
 class MoviesNotifier extends StateNotifier<List<MovieEntity>> {
-  late int currentPage = 0; // The current page of movies
-  late int currentIndex = 0; // The current index of the movies
-  final MovieCallBack fetchMoreMovies; // The function to fetch more movies
+  late int currentPage = 0;
+  late int currentIndex = 0;
+  late bool isLoading = false;
+  final MovieCallBack fetchMoreMovies;
 
   MoviesNotifier({
     required this.fetchMoreMovies,
@@ -34,14 +35,22 @@ class MoviesNotifier extends StateNotifier<List<MovieEntity>> {
 
   // This method loads the next page of movies
   Future<void> loadNextPage() async {
-    currentPage++; // Increment the current page
+    if (isLoading) return;
+    isLoading = true;
+    currentPage++;
+    // Fetch the next page of movies
     final List<MovieEntity> pageMovies = await fetchMoreMovies(
       page: currentPage,
-    ); // Fetch the next page of movies
+    );
+    // Update the state with the new page of movies
     state = [
       ...state,
       ...pageMovies,
-    ]; // Update the state with the new page of movies
+    ];
+    await Future.delayed(
+      const Duration(milliseconds: 3),
+    );
+    isLoading = false;
   }
 
   // This method sets the language of the movies to display
