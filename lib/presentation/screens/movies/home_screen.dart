@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 //* Own Imports
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/presentation/providers/movies/movies_provider.dart';
-import 'package:movies_app/presentation/screens/widgets/widgets.dart';
 import 'package:movies_app/presentation/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -16,6 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: _HomeView(),
+      bottomNavigationBar: CustomNavigationBar(),
     );
   }
 }
