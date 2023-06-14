@@ -40,19 +40,37 @@ class _HomeViewState extends ConsumerState<_HomeView> {
         ref.watch(nowPlayingMoviesProvider);
     final List<MovieEntity> carrouselOfMovies =
         ref.watch(moviesSlideshowProvider);
-    return Column(
-      children: [
-        GlobalAppBar(
-          appBarTitle: HomeScreen.title,
-          showSettingsButton: true,
+
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          floating: true,
+          flexibleSpace: FlexibleSpaceBar(
+            title: GlobalAppBar(
+              showSettingsButton: true,
+              appBarTitle: HomeScreen.title,
+            ),
+          ),
         ),
-        MoviesSlideshow(movies: carrouselOfMovies),
-        MoviesHorizontalListView(
-          movies: nowPlayingMovies,
-          title: 'Now In Cinemas!',
-          subTitle: 'Today',
-          loadNextPage: () =>
-              ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return Column(
+                children: [
+                  MoviesSlideshow(movies: carrouselOfMovies),
+                  MoviesHorizontalListView(
+                    movies: nowPlayingMovies,
+                    title: 'Now In Cinemas!',
+                    subTitle: 'Today',
+                    loadNextPage: () => ref
+                        .read(nowPlayingMoviesProvider.notifier)
+                        .loadNextPage(),
+                  ),
+                ],
+              );
+            },
+            childCount: 1,
+          ),
         ),
       ],
     );
