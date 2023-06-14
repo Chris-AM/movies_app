@@ -17,6 +17,15 @@ class MovieDBDataSource extends MoviesDataSource {
     ),
   );
 
+  List<MovieEntity> _moviesPetition(Map<String, dynamic> response) {
+    final TmdbResponse tmdbResponse = TmdbResponse.fromJson(response);
+    final List<MovieEntity> movies = tmdbResponse.results
+        .where((movieDB) => movieDB.posterPath != 'no-poster')
+        .map((movieDB) => TMDBMapper.movieDBToEntity(movieDB))
+        .toList();
+    return movies;
+  }
+
   @override
   Future<List<MovieEntity>> getNowPlaying({int page = 1, int index = 0}) async {
     final response = await dio.get(
@@ -26,11 +35,21 @@ class MovieDBDataSource extends MoviesDataSource {
         'language': moviesLanguagesMapper.values.toList()[index],
       },
     );
-    final TmdbResponse tmdbResponse = TmdbResponse.fromJson(response.data);
-    final List<MovieEntity> movies = tmdbResponse.results
-        .where((movieDB) => movieDB.posterPath != 'no-poster')
-        .map((movieDB) => TMDBMapper.movieDBToEntity(movieDB))
-        .toList();
+    final List<MovieEntity> movies = _moviesPetition(response.data);
+    return movies;
+  }
+
+  @override
+  Future<List<MovieEntity>> getPopular({int page = 1, int index = 0}) async {
+    final response = await dio.get(
+      '/movie/popular',
+      queryParameters: {
+        'page': page,
+        'language': moviesLanguagesMapper.values.toList()[index],
+      },
+    );
+
+    final List<MovieEntity> movies = _moviesPetition(response.data);
     return movies;
   }
 }
