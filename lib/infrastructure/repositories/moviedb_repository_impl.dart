@@ -18,6 +18,7 @@ class MovieRepositoryImpl extends MoviesRepository {
   Future<List<MovieEntity>> getPopular({int page = 1, int index = 0}) {
     return dataSource.getPopular(
       page: page,
+      index: index,
     );
   }
 }

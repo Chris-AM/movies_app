@@ -54,10 +54,10 @@ class _LanguageSelectionView extends ConsumerWidget {
         // Get the language name and code at the current index
         final entries = languagesMapState.entries.toList()[index];
         return LanguageRadioListTile(
-          languageNames: entries.key, // Set the language name
-          codes: entries.value, // Set the language code
-          selectedLanguage: selectedLanguage, // Set the selected language index
-          value: index, // Set the index of the language
+          languageNames: entries.key,
+          codes: entries.value,
+          selectedLanguage: selectedLanguage,
+          value: index,
           onChanged: (value) {
             // Update the selected language index in the state
             ref.read(moviesLanguageIndexProvider.notifier).state = index;
@@ -65,6 +65,7 @@ class _LanguageSelectionView extends ConsumerWidget {
             ref
                 .read(nowPlayingMoviesProvider.notifier)
                 .setMoviesLanguage(index);
+            ref.read(popularMoviesProvider.notifier).setMoviesLanguage(index);
           },
         );
       },
@@ -93,12 +94,11 @@ class LanguageRadioListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RadioListTile(
-      title: Text(languageNames), // Display the language name
-      subtitle: Text(codes), // Display the language code
-      groupValue: selectedLanguage, // Set the currently selected language index
-      value: value, // Set the index of the language
-      onChanged:
-          onChanged, // Set the callback function when the language is changed
+      title: Text(languageNames),
+      subtitle: Text(codes),
+      groupValue: selectedLanguage,
+      value: value,
+      onChanged: onChanged,
     );
   }
 }
