@@ -1,5 +1,6 @@
 //* Movies
 export 'package:movies_app/presentation/widgets/movies/movies_slideshow.dart';
+export 'package:movies_app/presentation/widgets/movies/movies_horizontal_listview.dart';
 
 //* shared
 export 'package:movies_app/presentation/widgets/shared/custom_navigation_bar.dart';

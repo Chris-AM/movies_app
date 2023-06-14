@@ -36,6 +36,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    final List<MovieEntity> nowPlayingMovies =
+        ref.watch(nowPlayingMoviesProvider);
     final List<MovieEntity> carrouselOfMovies =
         ref.watch(moviesSlideshowProvider);
     return Column(
@@ -45,6 +47,13 @@ class _HomeViewState extends ConsumerState<_HomeView> {
           showSettingsButton: true,
         ),
         MoviesSlideshow(movies: carrouselOfMovies),
+        MoviesHorizontalListView(
+          movies: nowPlayingMovies,
+          title: 'Now In Cinemas!',
+          subTitle: 'Today',
+          loadNextPage: () =>
+              ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+        ),
       ],
     );
   }
