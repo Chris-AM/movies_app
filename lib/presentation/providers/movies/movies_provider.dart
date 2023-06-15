@@ -3,8 +3,7 @@ import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/presentation/providers/movies/movies_repository_provider.dart';
 
 // This provider manages the state of the now playing movies
-final StateNotifierProvider<MoviesNotifier, List<MovieEntity>>
-    nowPlayingMoviesProvider =
+final nowPlayingMoviesProvider =
     StateNotifierProvider<MoviesNotifier, List<MovieEntity>>(
   (ref) {
     // Get the function to fetch more movies from the repository
@@ -16,8 +15,7 @@ final StateNotifierProvider<MoviesNotifier, List<MovieEntity>>
   },
 );
 
-final StateNotifierProvider<MoviesNotifier, List<MovieEntity>>
-    popularMoviesProvider =
+final popularMoviesProvider =
     StateNotifierProvider<MoviesNotifier, List<MovieEntity>>(
   (ref) {
     // Get the function to fetch more movies from the repository
@@ -29,10 +27,22 @@ final StateNotifierProvider<MoviesNotifier, List<MovieEntity>>
   },
 );
 
+final upComingMoviesProvider =
+    StateNotifierProvider<MoviesNotifier, List<MovieEntity>>(
+  (ref) {
+    // Get the function to fetch more movies from the repository
+    final fetchMoreMovies = ref.watch(movieRepositoryProvider).getUpcoming;
+    // Return a new instance of the MoviesNotifier with the fetchMoreMovies function
+    return MoviesNotifier(
+      fetchMoreMovies: fetchMoreMovies,
+    );
+  },
+);
+
 // This is a callback function that returns a list of movies
 typedef MovieCallBack = Future<List<MovieEntity>> Function({
   int page,
-  int index,
+  int movieLanguageIndex,
 });
 
 // This is a state notifier that manages the state of the movies
@@ -72,7 +82,7 @@ class MoviesNotifier extends StateNotifier<List<MovieEntity>> {
         moviesLanguageIndex; // Set the current index to the selected index
     // Fetch the movies with the selected language
     final List<MovieEntity> movieLanguagesToDisplay = await fetchMoreMovies(
-      index: currentIndex,
+      movieLanguageIndex: currentIndex,
     );
     state = [
       ...movieLanguagesToDisplay
