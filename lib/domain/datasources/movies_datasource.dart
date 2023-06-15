@@ -13,4 +13,8 @@ abstract class MoviesDataSource {
     int page = 1,
     int movieLanguageIndex = 0,
   });
+  Future<List<MovieEntity>> topRated({
+    int page = 1,
+    int movieLanguageIndex = 0,
+  });
 }

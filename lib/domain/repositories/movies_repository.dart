@@ -10,10 +10,14 @@ abstract class MoviesRepository {
     int page = 1,
     int movieLanguageIndex = 0,
   });
-  
+
   Future<List<MovieEntity>> getUpcoming({
     int page = 1,
     int movieLanguageIndex = 0,
   });
 
+  Future<List<MovieEntity>> topRated({
+    int page = 1,
+    int movieLanguageIndex = 0,
+  });
 }

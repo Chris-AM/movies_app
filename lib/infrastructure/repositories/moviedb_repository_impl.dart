@@ -32,4 +32,13 @@ class MovieRepositoryImpl extends MoviesRepository {
       movieLanguageIndex: movieLanguageIndex,
     );
   }
+
+  @override
+  Future<List<MovieEntity>> topRated(
+      {int page = 1, int movieLanguageIndex = 0}) {
+    return dataSource.topRated(
+      page: page,
+      movieLanguageIndex: movieLanguageIndex,
+    );
+  }
 }

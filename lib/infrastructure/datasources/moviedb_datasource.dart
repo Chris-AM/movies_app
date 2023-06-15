@@ -71,4 +71,19 @@ class MovieDBDataSource extends MoviesDataSource {
     final List<MovieEntity> movies = _moviesPetition(response.data);
     return movies;
   }
+
+  @override
+  Future<List<MovieEntity>> topRated(
+      {int page = 1, int movieLanguageIndex = 0}) async {
+    final response = await dio.get(
+      '/movie/top_rated',
+      queryParameters: {
+        'page': page,
+        'language': moviesLanguagesMapper.values.toList()[movieLanguageIndex],
+      },
+    );
+
+    final List<MovieEntity> movies = _moviesPetition(response.data);
+    return movies;
+  }
 }

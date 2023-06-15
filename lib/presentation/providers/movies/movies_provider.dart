@@ -39,6 +39,18 @@ final upComingMoviesProvider =
   },
 );
 
+final topRatedMoviesProvider =
+    StateNotifierProvider<MoviesNotifier, List<MovieEntity>>(
+  (ref) {
+    // Get the function to fetch more movies from the repository
+    final fetchMoreMovies = ref.watch(movieRepositoryProvider).topRated;
+    // Return a new instance of the MoviesNotifier with the fetchMoreMovies function
+    return MoviesNotifier(
+      fetchMoreMovies: fetchMoreMovies,
+    );
+  },
+);
+
 // This is a callback function that returns a list of movies
 typedef MovieCallBack = Future<List<MovieEntity>> Function({
   int page,
