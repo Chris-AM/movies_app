@@ -66,6 +66,7 @@ class _LanguageSelectionView extends ConsumerWidget {
                 .read(nowPlayingMoviesProvider.notifier)
                 .setMoviesLanguage(index);
             ref.read(popularMoviesProvider.notifier).setMoviesLanguage(index);
+            ref.read(upComingMoviesProvider.notifier).setMoviesLanguage(index);
           },
         );
       },
