@@ -39,6 +39,10 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isAppStarting = ref.watch(appInitialLoadProvider);
+    if (isAppStarting) {
+      return const AppInitialLoader();
+    }
     final List<MovieEntity> carrouselOfMovies =
         ref.watch(moviesSlideshowProvider);
     final List<MovieEntity> nowPlayingMovies =

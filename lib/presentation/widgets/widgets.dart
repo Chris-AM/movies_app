@@ -5,3 +5,4 @@ export 'package:movies_app/presentation/widgets/movies/movies_horizontal_listvie
 //* shared
 export 'package:movies_app/presentation/widgets/shared/custom_navigation_bar.dart';
 export 'package:movies_app/presentation/widgets/shared/global_app_bar.dart';
+export 'package:movies_app/presentation/widgets/shared/app_initial_load.dart';
