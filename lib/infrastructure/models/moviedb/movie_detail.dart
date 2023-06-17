@@ -12,7 +12,7 @@ String movieDetailToJson(MovieDetail data) => json.encode(data.toJson());
 class MovieDetail {
   final bool adult;
   final String backdropPath;
-  final BelongsToCollection belongsToCollection;
+  final BelongsToCollection? belongsToCollection;
   final int budget;
   final List<Genre> genres;
   final String homepage;
@@ -66,9 +66,12 @@ class MovieDetail {
 
   factory MovieDetail.fromJson(Map<String, dynamic> json) => MovieDetail(
         adult: json["adult"],
-        backdropPath: json["backdrop_path"],
-        belongsToCollection:
-            BelongsToCollection.fromJson(json["belongs_to_collection"]),
+        backdropPath: json["backdrop_path"] ?? '',
+        belongsToCollection: json["belongs_to_collection"] == null
+            ? null
+            : BelongsToCollection.fromJson(
+                json["belongs_to_collection"],
+              ),
         budget: json["budget"],
         genres: List<Genre>.from(json["genres"].map((x) => Genre.fromJson(x))),
         homepage: json["homepage"],
@@ -101,7 +104,7 @@ class MovieDetail {
   Map<String, dynamic> toJson() => {
         "adult": adult,
         "backdrop_path": backdropPath,
-        "belongs_to_collection": belongsToCollection.toJson(),
+        "belongs_to_collection": belongsToCollection?.toJson(),
         "budget": budget,
         "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
         "homepage": homepage,
@@ -182,7 +185,7 @@ class Genre {
 
 class ProductionCompany {
   final int id;
-  final String logoPath;
+  final String? logoPath;
   final String name;
   final String originCountry;
 

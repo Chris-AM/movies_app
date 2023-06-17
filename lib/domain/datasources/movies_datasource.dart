@@ -18,7 +18,7 @@ abstract class MoviesDataSource {
     int movieLanguageIndex = 0,
   });
   Future<MovieEntity> getMovieById({
-    required String movieId,
+    String movieId,
     int movieLanguageIndex = 0,
   });
 }

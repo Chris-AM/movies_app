@@ -1,4 +1,4 @@
-import 'package:movies_app/domain/entities/movie_detail.dart';
+import 'package:movies_app/infrastructure/models/moviedb/movie_detail.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/infrastructure/models/moviedb/moviedb_result.dart';
 

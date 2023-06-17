@@ -20,10 +20,9 @@ abstract class MoviesRepository {
     int page = 1,
     int movieLanguageIndex = 0,
   });
-  
-  Future<MovieEntity> getDetail({
-    required String movieId,
+
+  Future<MovieEntity> getMovieById({
+    String movieId,
     int movieLanguageIndex = 0,
   });
-
 }
