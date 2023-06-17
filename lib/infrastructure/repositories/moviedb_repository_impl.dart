@@ -41,4 +41,13 @@ class MovieRepositoryImpl extends MoviesRepository {
       movieLanguageIndex: movieLanguageIndex,
     );
   }
+
+  @override
+  Future<MovieEntity> getDetail(
+      {required String movieId, int movieLanguageIndex = 0}) {
+    return dataSource.getMovieById(
+      movieId: movieId,
+      movieLanguageIndex: movieLanguageIndex,
+    );
+  }
 }

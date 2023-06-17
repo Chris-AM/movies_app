@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 //* Own Imports
 import 'package:movies_app/config/constants/environment.dart';
 import 'package:movies_app/domain/datasources/movies_datasource.dart';
+import 'package:movies_app/domain/entities/movie_detail.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/infrastructure/mappers/mappers.dart';
 import 'package:movies_app/infrastructure/models/moviedb/moviedb_response.dart';
@@ -85,5 +86,23 @@ class MovieDBDataSource extends MoviesDataSource {
 
     final List<MovieEntity> movies = _moviesPetition(response.data);
     return movies;
+  }
+
+  @override
+  Future<MovieEntity> getMovieById(
+      {required String movieId, int movieLanguageIndex = 0}) async {
+    final response = await dio.get(
+      '/movie/$movieId',
+      queryParameters: {
+        'language': moviesLanguagesMapper.values.toList()[movieLanguageIndex],
+      },
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Movie with $movieId not found');
+    }
+    final MovieDetail foundMovie = MovieDetail.fromJson(response.data);
+    final MovieEntity movie = TMDBMapper.movieDetail(foundMovie);
+    return movie;
   }
 }

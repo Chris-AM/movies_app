@@ -1,3 +1,4 @@
+import 'package:movies_app/domain/entities/movie_detail.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/infrastructure/models/moviedb/moviedb_result.dart';
 
@@ -22,4 +23,24 @@ class TMDBMapper {
         voteAverage: response.voteAverage,
         voteCount: response.voteCount,
       );
+
+  static MovieEntity movieDetail(MovieDetail movieDetail) => MovieEntity(
+      adult: movieDetail.adult,
+      backdropPath: movieDetail.backdropPath != ''
+          ? 'https://image.tmdb.org/t/p/w500${movieDetail.backdropPath}'
+          : 'https://sd.keepcalms.com/i/keep-calm-poster-not-found.png',
+      genreIds: movieDetail.genres.map((e) => e.name).toList(),
+      id: movieDetail.id,
+      originalLanguage: movieDetail.originalLanguage,
+      originalTitle: movieDetail.originalTitle,
+      overview: movieDetail.overview,
+      popularity: movieDetail.popularity,
+      posterPath: movieDetail.posterPath != ''
+          ? 'https://image.tmdb.org/t/p/w500${movieDetail.posterPath}'
+          : 'https://sd.keepcalms.com/i/keep-calm-poster-not-found.png',
+      releaseDate: movieDetail.releaseDate,
+      title: movieDetail.title,
+      video: movieDetail.video,
+      voteAverage: movieDetail.voteAverage,
+      voteCount: movieDetail.voteCount);
 }
