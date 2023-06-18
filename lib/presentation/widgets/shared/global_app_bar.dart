@@ -15,29 +15,34 @@ class GlobalAppBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = Theme.of(context).colorScheme;
     final textStyle = Theme.of(context).textTheme;
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10,
-        ),
-        child: SizedBox(
-          width: double.infinity,
-          child: Row(
-            children: [
-              Icon(
-                Icons.movie_creation_rounded,
-                color: colors.primary,
+    return SliverAppBar(
+      floating: true,
+      flexibleSpace: FlexibleSpaceBar(
+        title: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.movie_creation_rounded,
+                    color: colors.primary,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    appBarTitle,
+                    style: textStyle.titleMedium,
+                  ),
+                  const Spacer(),
+                  _IconsRow(showSettingsButton: showSettingsButton),
+                ],
               ),
-              const SizedBox(
-                width: 5,
-              ),
-              Text(
-                appBarTitle,
-                style: textStyle.titleMedium,
-              ),
-              const Spacer(),
-              _IconsRow(showSettingsButton: showSettingsButton),
-            ],
+            ),
           ),
         ),
       ),
