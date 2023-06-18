@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 //* Own Imports
-import 'package:movies_app/presentation/providers/movies/movies_languages_provider.dart';
-import 'package:movies_app/presentation/providers/movies/movies_provider.dart';
+import 'package:movies_app/presentation/providers/providers.dart';
 
 // This is a stateless widget that displays the movie language selection screen
 class MovieLanguageSelectionScreen extends StatelessWidget {

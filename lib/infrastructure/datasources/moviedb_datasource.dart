@@ -97,9 +97,6 @@ class MovieDBDataSource extends MoviesDataSource {
         'language': moviesLanguagesMapper.values.toList()[movieLanguageIndex],
       },
     );
-
-    print('full url => ${response.realUri}');
-
     if (response.statusCode != 200) {
       throw Exception('Movie with $movieId not found');
     }
