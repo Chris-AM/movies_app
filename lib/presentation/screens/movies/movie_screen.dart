@@ -1,7 +1,8 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movies_app/domain/entities/entities.dart';
-import 'package:movies_app/presentation/providers/movies/movie_info_provider.dart';
+import 'package:movies_app/presentation/providers/providers.dart';
 
 class MovieScreen extends ConsumerStatefulWidget {
   static const name = 'movie_screen';
@@ -19,8 +20,8 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   @override
   void initState() {
     super.initState();
-
     ref.read(movieInfoProvider.notifier).loadMovie(widget.movieId);
+    ref.read(castByMovieProvider.notifier).loadCast(widget.movieId);
   }
 
   @override
@@ -72,12 +73,6 @@ class _MovieDetailAppBar extends StatelessWidget {
         titlePadding: const EdgeInsets.symmetric(
           horizontal: 10,
           vertical: 5,
-        ),
-        title: Text(
-          movie.title,
-          style: const TextStyle(
-            fontSize: 20,
-          ),
         ),
         background: _AppBarImage(movie: movie),
       ),
@@ -155,10 +150,73 @@ class _MovieDetails extends StatelessWidget {
             ],
           ),
         ),
+        _CastByMovie(
+          movieId: movie.id.toString(),
+        ),
         const SizedBox(
-          height: 100,
+          height: 50,
         ),
       ],
+    );
+  }
+}
+
+class _CastByMovie extends ConsumerWidget {
+  final String movieId;
+  const _CastByMovie({
+    required this.movieId,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final castByMovie = ref.watch(castByMovieProvider);
+    if (castByMovie[movieId] == null) {
+      return const CircularProgressIndicator();
+    }
+    final cast = castByMovie[movieId]!;
+    return SizedBox(
+      height: 300,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: cast.length,
+        itemBuilder: (context, index) {
+          final actor = cast[index];
+          return Container(
+            padding: const EdgeInsets.only(
+              top: 20,
+              bottom: 5,
+              left: 8,
+              right: 5,
+            ),
+            width: 135,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FadeInRight(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      actor.profilePath,
+                      height: 180,
+                      width: 135,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Text(actor.name),
+                Text(
+                  actor.character ?? '',
+                  maxLines: 2,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
@@ -178,6 +236,12 @@ class _AppBarImage extends StatelessWidget {
           child: Image.network(
             movie.posterPath,
             fit: BoxFit.cover,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress != null) {
+                return const SizedBox();
+              }
+              return FadeIn(child: child);
+            },
           ),
         ),
         const SizedBox.expand(
