@@ -61,21 +61,59 @@ class _Carrousel extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 30),
       child: DecoratedBox(
         decoration: decoration,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Image.network(
-            movie.backdropPath,
-            fit: BoxFit.cover,
-            loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress != null) {
-                // TODO: change pattern when loading
-                return const DecoratedBox(
-                  decoration: BoxDecoration(color: Colors.black45),
-                );
-              }
-              return FadeIn(child: child);
-            },
-          ),
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(
+                movie.backdropPath,
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress != null) {
+                    // TODO: change pattern when loading
+                    return const DecoratedBox(
+                      decoration: BoxDecoration(color: Colors.black45),
+                    );
+                  }
+                  return FadeIn(child: child);
+                },
+              ),
+            ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                child: SizedBox(
+                  width: 302,
+                  height: 200,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.center,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black87,
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox.expand(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 140, left: 20),
+                child: Text(
+                  movie.title,
+                  maxLines: 2,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
