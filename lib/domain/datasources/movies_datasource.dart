@@ -21,4 +21,8 @@ abstract class MoviesDataSource {
     String movieId,
     int movieLanguageIndex = 0,
   });
+  Future<List<MovieEntity>> searchMovies({
+    String searchTerm,
+    int movieLanguageIndex = 0,
+  });
 }

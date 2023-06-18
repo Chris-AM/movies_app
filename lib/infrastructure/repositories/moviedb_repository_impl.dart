@@ -50,4 +50,13 @@ class MovieRepositoryImpl extends MoviesRepository {
       movieLanguageIndex: movieLanguageIndex,
     );
   }
+
+  @override
+  Future<List<MovieEntity>> searchMovies(
+      {String searchTerm = '', int movieLanguageIndex = 0}) {
+    return dataSource.searchMovies(
+      searchTerm: searchTerm,
+      movieLanguageIndex: movieLanguageIndex,
+    );
+  }
 }

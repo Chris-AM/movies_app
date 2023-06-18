@@ -104,4 +104,20 @@ class MovieDBDataSource extends MoviesDataSource {
     final MovieEntity movie = TMDBMapper.movieDetail(foundMovie);
     return movie;
   }
+
+  @override
+  Future<List<MovieEntity>> searchMovies(
+      {String searchTerm = '', int movieLanguageIndex = 0}) async {
+    final response = await dio.get(
+      'search/movie',
+      queryParameters: {
+        'query': searchTerm,
+        'language': moviesLanguagesMapper.values.toList()[movieLanguageIndex],
+      },
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Movie $searchTerm not found');
+    }
+    return _moviesPetition(response.data);
+  }
 }
