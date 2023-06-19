@@ -109,7 +109,7 @@ class MovieDBDataSource extends MoviesDataSource {
   Future<List<MovieEntity>> searchMovies(
       {String searchTerm = '', int movieLanguageIndex = 0}) async {
     final response = await dio.get(
-      'search/movie',
+      '/search/movie',
       queryParameters: {
         'query': searchTerm,
         'language': moviesLanguagesMapper.values.toList()[movieLanguageIndex],

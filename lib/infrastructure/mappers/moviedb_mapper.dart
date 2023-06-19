@@ -17,7 +17,9 @@ class TMDBMapper {
         posterPath: response.posterPath != ''
             ? 'https://image.tmdb.org/t/p/w500${response.posterPath}'
             : 'https://sd.keepcalms.com/i/keep-calm-poster-not-found.png',
-        releaseDate: response.releaseDate,
+        releaseDate: response.releaseDate != null
+            ? response.releaseDate!
+            : DateTime.now(),
         title: response.title,
         video: response.video,
         voteAverage: response.voteAverage,

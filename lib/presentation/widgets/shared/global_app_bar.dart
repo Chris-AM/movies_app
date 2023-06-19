@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movies_app/presentation/delegates/delegates.dart';
+import 'package:movies_app/presentation/providers/providers.dart';
 
 class GlobalAppBar extends ConsumerWidget {
   final bool showSettingsButton;
@@ -50,7 +52,7 @@ class GlobalAppBar extends ConsumerWidget {
   }
 }
 
-class _IconsRow extends StatelessWidget {
+class _IconsRow extends ConsumerWidget {
   const _IconsRow({
     required this.showSettingsButton,
   });
@@ -58,7 +60,7 @@ class _IconsRow extends StatelessWidget {
   final bool showSettingsButton;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Wrap(
       children: [
         IconButton(
@@ -72,7 +74,15 @@ class _IconsRow extends StatelessWidget {
               : const SizedBox.shrink(),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            final movieRepository = ref.read(movieRepositoryProvider);
+            showSearch(
+              context: context,
+              delegate: SearchMovieDelegate(
+                searchMoviesCallBack: movieRepository.searchMovies,
+              ),
+            );
+          },
           icon: const Icon(
             Icons.search_rounded,
           ),
