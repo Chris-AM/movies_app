@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/presentation/delegates/delegates.dart';
 import 'package:movies_app/presentation/providers/providers.dart';
+import 'package:movies_app/presentation/providers/search/search_movies_provider.dart';
 
 class GlobalAppBar extends ConsumerWidget {
   final bool showSettingsButton;
@@ -75,12 +77,22 @@ class _IconsRow extends ConsumerWidget {
         ),
         IconButton(
           onPressed: () {
-            final movieRepository = ref.read(movieRepositoryProvider);
-            showSearch(
+            final searchedMovies = ref.read(searchedMoviesProvider);
+            final searchQuery = ref.read(searchQueryProvider);
+            final movieProvider =
+                ref.read(searchedMoviesProvider.notifier).searchedMovies;
+            showSearch<MovieEntity?>(
+              query: searchQuery,
               context: context,
               delegate: SearchMovieDelegate(
-                searchMoviesCallBack: movieRepository.searchMovies,
+                initialMovies: searchedMovies,
+                searchMoviesCallBack: movieProvider,
               ),
+            ).then(
+              (movie) {
+                if (movie == null) return;
+                context.push('/movie/${movie.id}');
+              },
             );
           },
           icon: const Icon(
