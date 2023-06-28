@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movies_app/domain/entities/entities.dart';
 import 'package:movies_app/presentation/providers/providers.dart';
 
-final searchQueryProvider = StateProvider<String>((ref) => '');
+final searchTermProvider = StateProvider<String>((ref) => '');
 
 final searchedMoviesProvider =
     StateNotifierProvider<SearchedMoviesNotifier, List<MovieEntity>>(
@@ -34,7 +34,7 @@ class SearchedMoviesNotifier extends StateNotifier<List<MovieEntity>> {
       {String searchTerm = '', int movieLanguageIndex = 0}) async {
     final List<MovieEntity> movies =
         await searchedMovies(searchTerm: searchTerm);
-    ref.read(searchQueryProvider.notifier).update((state) => searchTerm);
+    ref.read(searchTermProvider.notifier).update((state) => searchTerm);
 
     state = movies;
     return movies;

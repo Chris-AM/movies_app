@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/presentation/delegates/delegates.dart';
 import 'package:movies_app/presentation/providers/providers.dart';
-import 'package:movies_app/presentation/providers/search/search_movies_provider.dart';
 
 class GlobalAppBar extends ConsumerWidget {
   final bool showSettingsButton;
@@ -78,11 +77,11 @@ class _IconsRow extends ConsumerWidget {
         IconButton(
           onPressed: () {
             final searchedMovies = ref.read(searchedMoviesProvider);
-            final searchQuery = ref.read(searchQueryProvider);
+            final searchTerm = ref.read(searchTermProvider);
             final movieProvider =
-                ref.read(searchedMoviesProvider.notifier).searchedMovies;
+                ref.read(searchedMoviesProvider.notifier).searchMoviesByQuery;
             showSearch<MovieEntity?>(
-              query: searchQuery,
+              query: searchTerm,
               context: context,
               delegate: SearchMovieDelegate(
                 initialMovies: searchedMovies,

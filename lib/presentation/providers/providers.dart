@@ -8,3 +8,5 @@ export 'movies/movies_languages_provider.dart';
 export 'movies/movies_provider.dart';
 export 'movies/movies_repository_provider.dart';
 export 'movies/movies_slideshow_provider.dart';
+//* Search
+export 'search/search_movies_provider.dart';
