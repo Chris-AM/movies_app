@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/presentation/delegates/delegates.dart';
+import 'package:movies_app/presentation/helpers/helpers.dart';
 import 'package:movies_app/presentation/providers/providers.dart';
 
 class GlobalAppBar extends ConsumerWidget {
@@ -90,7 +91,8 @@ class _IconsRow extends ConsumerWidget {
             ).then(
               (movie) {
                 if (movie == null) return;
-                context.push('/movie/${movie.id}');
+                PushToMovieHelper.pushToMovie(context,
+                    movieId: (movie.id).toString());
               },
             );
           },

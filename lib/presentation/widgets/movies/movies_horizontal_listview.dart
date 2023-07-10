@@ -1,8 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:movies_app/config/helpers/human_formats.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
+import 'package:movies_app/presentation/helpers/helpers.dart';
 
 class MoviesHorizontalListView extends StatefulWidget {
   final List<MovieEntity> movies;
@@ -233,7 +233,12 @@ class _MovieImages extends StatelessWidget {
               child: FadeIn(
                 child: child,
               ),
-              onTap: () => context.push('/movie/${movie.id}'),
+              onTap: () {
+                PushToMovieHelper.pushToMovie(
+                  context,
+                  movieId: (movie.id).toString(),
+                );
+              },
             );
           },
         ),
