@@ -1,47 +1,39 @@
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/presentation/screens/screens.dart';
-import 'package:movies_app/presentation/views/views.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/home/0',
   routes: [
-    ShellRoute(
-      builder: (context, state, child) {
-        return HomeScreen(childView: child);
+    GoRoute(
+      path: '/home/:screen',
+      builder: (context, state) {
+        final String screenIndex = state.pathParameters['screen'] ?? '0';
+        return HomeScreen(
+          screenIndex: int.parse(screenIndex),
+        );
       },
       routes: [
         GoRoute(
-          path: '/',
+          path: 'movie/:id',
           builder: (context, state) {
-            return const HomeView();
+            final String movieId = state.pathParameters['id'] ?? 'no-id';
+            return MovieScreen(
+              movieId: movieId,
+            );
           },
-          routes: [
-            GoRoute(
-              path: 'movie/:id',
-              name: MovieScreen.name,
-              builder: (context, state) =>
-                  MovieScreen(movieId: state.pathParameters['id'] ?? 'no-id'),
-            ),
-          ],
-        ),
-        GoRoute(
-          path: '/movie_language_selection',
-          name: MovieLanguageSelectionScreen.name,
-          builder: (context, state) => const MovieLanguageSelectionScreen(),
-        ),
-        GoRoute(
-          path: '/categories',
-          builder: (context, state) {
-            return const CategoriesView();
-          },
-        ),
-        GoRoute(
-          path: '/favorites',
-          builder: (context, state) {
-            return const FavoritesView();
-          },
-        ),
+        )
       ],
+    ),
+    GoRoute(
+      path: '/movie_language_selection',
+      builder: (context, state) {
+        return const MovieLanguageSelectionScreen();
+      },
+    ),
+    //* Redirect
+    GoRoute(
+      path: '/',
+      redirect: (_, __) => '/home/0',
     )
   ],
 );

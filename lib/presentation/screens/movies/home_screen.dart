@@ -5,17 +5,26 @@ import 'package:movies_app/presentation/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   static String name = 'Home_Screen';
-  final Widget childView;
+  final int screenIndex;
   const HomeScreen({
     super.key,
-    required this.childView,
+    required this.screenIndex,
   });
+
+  final viewRoutes = const <Widget>[
+    HomeView(),
+    CategoriesView(),
+    FavoritesView(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: childView,
-      bottomNavigationBar: const CustomNavigationBar(),
+      body: IndexedStack(
+        index: screenIndex,
+        children: viewRoutes,
+      ),
+      bottomNavigationBar:  CustomNavigationBar( currentIndex: screenIndex ),
     );
   }
 }
