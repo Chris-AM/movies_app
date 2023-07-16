@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movies_app/domain/entities/movie_entity.dart';
+import 'package:movies_app/domain/domain.dart';
 import 'package:movies_app/presentation/providers/movies/movies_repository_provider.dart';
 
 // This provider manages the state of the now playing movies
