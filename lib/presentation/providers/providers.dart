@@ -10,3 +10,6 @@ export 'movies/movies_repository_provider.dart';
 export 'movies/movies_slideshow_provider.dart';
 //* Search
 export 'search/search_movies_provider.dart';
+//* Local Storage
+export 'storage/local_storage_repository_provider.dart';
+export 'storage/favorite_provider.dart';
