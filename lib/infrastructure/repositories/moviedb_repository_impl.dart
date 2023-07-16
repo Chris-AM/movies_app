@@ -7,56 +7,32 @@ class MovieRepositoryImpl extends MoviesRepository {
 
   MovieRepositoryImpl(this.dataSource);
   @override
-  Future<List<MovieEntity>> getNowPlaying(
-      {int page = 1, int movieLanguageIndex = 0}) {
-    return dataSource.getNowPlaying(
-      page: page,
-      movieLanguageIndex: movieLanguageIndex,
-    );
+  Future<List<MovieEntity>> getNowPlaying(int page) {
+    return dataSource.getNowPlaying(page);
   }
 
   @override
-  Future<List<MovieEntity>> getPopular(
-      {int page = 1, int movieLanguageIndex = 0}) {
-    return dataSource.getPopular(
-      page: page,
-      movieLanguageIndex: movieLanguageIndex,
-    );
+  Future<List<MovieEntity>> getPopular(int page) {
+    return dataSource.getPopular(page);
   }
 
   @override
-  Future<List<MovieEntity>> getUpcoming(
-      {int page = 1, int movieLanguageIndex = 0}) {
-    return dataSource.getUpcoming(
-      page: page,
-      movieLanguageIndex: movieLanguageIndex,
-    );
+  Future<List<MovieEntity>> getUpcoming(int page) {
+    return dataSource.getUpcoming(page);
   }
 
   @override
-  Future<List<MovieEntity>> topRated(
-      {int page = 1, int movieLanguageIndex = 0}) {
-    return dataSource.topRated(
-      page: page,
-      movieLanguageIndex: movieLanguageIndex,
-    );
+  Future<List<MovieEntity>> topRated(int page) {
+    return dataSource.topRated(page);
   }
 
   @override
-  Future<MovieEntity> getMovieById(
-      {String movieId = '', int movieLanguageIndex = 0}) {
-    return dataSource.getMovieById(
-      movieId: movieId,
-      movieLanguageIndex: movieLanguageIndex,
-    );
+  Future<MovieEntity> getMovieById(String movieId) {
+    return dataSource.getMovieById(movieId);
   }
 
   @override
-  Future<List<MovieEntity>> searchMovies(
-      {String searchTerm = '', int movieLanguageIndex = 0}) {
-    return dataSource.searchMovies(
-      searchTerm: searchTerm,
-      movieLanguageIndex: movieLanguageIndex,
-    );
+  Future<List<MovieEntity>> searchMovies(String searchTerm) {
+    return dataSource.searchMovies(searchTerm);
   }
 }

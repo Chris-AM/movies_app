@@ -10,10 +10,7 @@ final movieInfoProvider =
   },
 );
 
-typedef GetMovieCallBack = Future<MovieEntity> Function({
-  String movieId,
-  int movieLanguageIndex,
-});
+typedef GetMovieCallBack = Future<MovieEntity> Function(String movieId);
 
 class MovieMapNotifier extends StateNotifier<Map<String, MovieEntity>> {
   late int currentIndex = 0;
@@ -23,15 +20,9 @@ class MovieMapNotifier extends StateNotifier<Map<String, MovieEntity>> {
     required this.getMovieCallBack,
   }) : super({});
 
-  Future<void> loadMovie({
-    String movieId = '',
-    int movieLanguageIndex = 0,
-  }) async {
+  Future<void> loadMovie(String movieId) async {
     if (state[movieId] != null) return;
-    final MovieEntity movie = await getMovieCallBack(
-      movieId: movieId,
-      movieLanguageIndex: movieLanguageIndex,
-    );
+    final MovieEntity movie = await getMovieCallBack(movieId);
     state = {...state, movieId: movie};
   }
 }

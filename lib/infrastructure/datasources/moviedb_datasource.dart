@@ -26,13 +26,13 @@ class MovieDBDataSource extends MoviesDataSource {
   }
 
   @override
-  Future<List<MovieEntity>> getNowPlaying(
-      {int page = 1, int movieLanguageIndex = 0}) async {
+  Future<List<MovieEntity>> getNowPlaying(int page) async {
+    print('page: $page');
     final response = await dio.get(
       '/movie/now_playing',
       queryParameters: {
         'page': page,
-        'language': moviesLanguagesMapper.values.toList()[movieLanguageIndex],
+        'language': moviesLanguagesMapper.values.toList()[1],
       },
     );
     final List<MovieEntity> movies = _moviesPetition(response.data);
@@ -40,13 +40,12 @@ class MovieDBDataSource extends MoviesDataSource {
   }
 
   @override
-  Future<List<MovieEntity>> getPopular(
-      {int page = 1, int movieLanguageIndex = 0}) async {
+  Future<List<MovieEntity>> getPopular(int page) async {
     final response = await dio.get(
       '/movie/popular',
       queryParameters: {
         'page': page,
-        'language': moviesLanguagesMapper.values.toList()[movieLanguageIndex],
+        'language': moviesLanguagesMapper.values.toList()[1],
       },
     );
 
@@ -55,15 +54,13 @@ class MovieDBDataSource extends MoviesDataSource {
   }
 
   @override
-  Future<List<MovieEntity>> getUpcoming({
-    int page = 1,
-    int movieLanguageIndex = 0,
-  }) async {
+  Future<List<MovieEntity>> getUpcoming(int page) async {
+    print('page: $page');
     final response = await dio.get(
       '/movie/upcoming',
       queryParameters: {
         'page': page,
-        'language': moviesLanguagesMapper.values.toList()[movieLanguageIndex],
+        'language': moviesLanguagesMapper.values.toList()[1],
       },
     );
 
@@ -72,13 +69,12 @@ class MovieDBDataSource extends MoviesDataSource {
   }
 
   @override
-  Future<List<MovieEntity>> topRated(
-      {int page = 1, int movieLanguageIndex = 0}) async {
+  Future<List<MovieEntity>> topRated(int page) async {
     final response = await dio.get(
       '/movie/top_rated',
       queryParameters: {
         'page': page,
-        'language': moviesLanguagesMapper.values.toList()[movieLanguageIndex],
+        'language': moviesLanguagesMapper.values.toList()[1],
       },
     );
 
@@ -87,12 +83,11 @@ class MovieDBDataSource extends MoviesDataSource {
   }
 
   @override
-  Future<MovieEntity> getMovieById(
-      {String movieId = 'id', int movieLanguageIndex = 0}) async {
+  Future<MovieEntity> getMovieById(String movieId) async {
     final response = await dio.get(
       '/movie/$movieId',
       queryParameters: {
-        'language': moviesLanguagesMapper.values.toList()[movieLanguageIndex],
+        'language': moviesLanguagesMapper.values.toList()[0],
       },
     );
     if (response.statusCode != 200) {
@@ -104,8 +99,7 @@ class MovieDBDataSource extends MoviesDataSource {
   }
 
   @override
-  Future<List<MovieEntity>> searchMovies(
-      {String searchTerm = '', int movieLanguageIndex = 0}) async {
+  Future<List<MovieEntity>> searchMovies(String searchTerm) async {
     if (searchTerm.isEmpty) {
       return [];
     }
@@ -113,7 +107,7 @@ class MovieDBDataSource extends MoviesDataSource {
       '/search/movie',
       queryParameters: {
         'query': searchTerm,
-        'language': moviesLanguagesMapper.values.toList()[movieLanguageIndex],
+        'language': moviesLanguagesMapper.values.toList()[0],
       },
     );
     if (response.statusCode != 200) {

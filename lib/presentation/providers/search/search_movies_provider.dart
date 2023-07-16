@@ -16,10 +16,8 @@ final searchedMoviesProvider =
   },
 );
 
-typedef SearchMoviesCallback = Future<List<MovieEntity>> Function({
-  String searchTerm,
-  int movieLanguageIndex,
-});
+typedef SearchMoviesCallback = Future<List<MovieEntity>> Function(
+    String searchTerm);
 
 class SearchedMoviesNotifier extends StateNotifier<List<MovieEntity>> {
   final SearchMoviesCallback searchedMovies;
@@ -30,10 +28,8 @@ class SearchedMoviesNotifier extends StateNotifier<List<MovieEntity>> {
     required this.ref,
   }) : super([]);
 
-  Future<List<MovieEntity>> searchMoviesByQuery(
-      {String searchTerm = '', int movieLanguageIndex = 0}) async {
-    final List<MovieEntity> movies =
-        await searchedMovies(searchTerm: searchTerm);
+  Future<List<MovieEntity>> searchMoviesByQuery(String searchTerm) async {
+    final List<MovieEntity> movies = await searchedMovies(searchTerm);
     ref.read(searchTermProvider.notifier).update((state) => searchTerm);
 
     state = movies;

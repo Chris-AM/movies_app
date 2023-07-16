@@ -52,10 +52,7 @@ final topRatedMoviesProvider =
 );
 
 // This is a callback function that returns a list of movies
-typedef MovieCallBack = Future<List<MovieEntity>> Function({
-  int page,
-  int movieLanguageIndex,
-});
+typedef MovieCallBack = Future<List<MovieEntity>> Function(int page);
 
 // This is a state notifier that manages the state of the movies
 class MoviesNotifier extends StateNotifier<List<MovieEntity>> {
@@ -74,9 +71,7 @@ class MoviesNotifier extends StateNotifier<List<MovieEntity>> {
     isLoading = true;
     currentPage++;
     // Fetch the next page of movies
-    final List<MovieEntity> pageMovies = await fetchMoreMovies(
-      page: currentPage,
-    );
+    final List<MovieEntity> pageMovies = await fetchMoreMovies(currentPage);
     // Update the state with the new page of movies
     state = [
       ...state,
@@ -94,7 +89,7 @@ class MoviesNotifier extends StateNotifier<List<MovieEntity>> {
         moviesLanguageIndex; // Set the current index to the selected index
     // Fetch the movies with the selected language
     final List<MovieEntity> movieLanguagesToDisplay = await fetchMoreMovies(
-      movieLanguageIndex: currentIndex,
+      currentIndex,
     );
     state = [
       ...movieLanguagesToDisplay

@@ -20,11 +20,8 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   @override
   void initState() {
     super.initState();
-    final int movieLanguageIndex = ref.read(moviesLanguageIndexProvider);
-    ref.read(movieInfoProvider.notifier).loadMovie(
-          movieId: widget.movieId,
-          movieLanguageIndex: movieLanguageIndex,
-        );
+    // final int movieLanguageIndex = ref.read(moviesLanguageIndexProvider);
+    ref.read(movieInfoProvider.notifier).loadMovie( widget.movieId);
     ref.read(castByMovieProvider.notifier).loadCast(widget.movieId);
   }
 

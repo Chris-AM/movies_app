@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/config/helpers/human_formats.dart';
 import 'package:movies_app/domain/domain.dart';
 
-typedef SearchMoviesCallBack = Future<List<MovieEntity>> Function(
-    {String searchTerm, int movieLanguageIndex});
+typedef SearchMoviesCallBack = Future<List<MovieEntity>> Function( String searchTerm);
 
 class SearchMovieDelegate extends SearchDelegate<MovieEntity?> {
   final SearchMoviesCallBack searchMoviesCallBack;
@@ -35,7 +34,7 @@ class SearchMovieDelegate extends SearchDelegate<MovieEntity?> {
     }
     _debounceTimer = Timer(const Duration(milliseconds: 500), () async {
       final List<MovieEntity> movies =
-          await searchMoviesCallBack(searchTerm: searchTerm);
+          await searchMoviesCallBack(searchTerm);
       initialMovies = movies;
       debouncedMovies.add(movies);
       isLoadingStream.add(false);
