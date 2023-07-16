@@ -1,8 +1,10 @@
 //* Movies
-export 'package:movies_app/presentation/widgets/movies/movies_slideshow.dart';
-export 'package:movies_app/presentation/widgets/movies/movies_horizontal_listview.dart';
+export 'movies/fav_movies_grid_view.dart';
+export 'movies/movie_poster_link.dart';
+export 'movies/movies_horizontal_listview.dart';
+export 'movies/movies_slideshow.dart';
 
 //* shared
-export 'package:movies_app/presentation/widgets/shared/custom_navigation_bar.dart';
-export 'package:movies_app/presentation/widgets/shared/global_app_bar.dart';
-export 'package:movies_app/presentation/widgets/shared/app_initial_load.dart';
+export 'shared/custom_navigation_bar.dart';
+export 'shared/global_app_bar.dart';
+export 'shared/app_initial_load.dart';
