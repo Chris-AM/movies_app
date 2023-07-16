@@ -1,6 +1,5 @@
 import 'package:isar/isar.dart';
-import 'package:movies_app/domain/datasources/local_storage_datasource.dart';
-import 'package:movies_app/domain/entities/movie_entity.dart';
+import 'package:movies_app/domain/domain.dart';
 import 'package:path_provider/path_provider.dart';
 
 class IsarDatasource extends LocalStorageDataSource {
@@ -26,7 +25,7 @@ class IsarDatasource extends LocalStorageDataSource {
   Future<bool> isFavorite(int movieId) async {
     final isar = await isarDb;
     final MovieEntity? findFavMovies =
-        await isar.movieEntitys.filter().idEqualTo(movieId).findFirst();
+        await isar.movieEntities.filter().idEqualTo(movieId).findFirst();
     return findFavMovies != null;
   }
 
@@ -34,7 +33,7 @@ class IsarDatasource extends LocalStorageDataSource {
   Future<List<MovieEntity>> loadMovies({int limit = 10, int offset = 0}) async {
     final isar = await isarDb;
     final Future<List<MovieEntity>> query =
-        isar.movieEntitys.where().offset(offset).limit(limit).findAll();
+        isar.movieEntities.where().offset(offset).limit(limit).findAll();
     return query;
   }
 
@@ -42,14 +41,14 @@ class IsarDatasource extends LocalStorageDataSource {
   Future<void> toggleFavorite(MovieEntity movie) async {
     final isar = await isarDb;
     final findFavMovies =
-        await isar.movieEntitys.filter().idEqualTo(movie.id).findFirst();
+        await isar.movieEntities.filter().idEqualTo(movie.id).findFirst();
 
     if (findFavMovies != null) {
       isar.writeTxnSync(
-        () => isar.movieEntitys.deleteSync(findFavMovies.isarId!),
+        () => isar.movieEntities.deleteSync(findFavMovies.isarId!),
       );
       return;
     }
-    isar.writeTxnSync(() => isar.movieEntitys.putSync(movie));
+    isar.writeTxnSync(() => isar.movieEntities.putSync(movie));
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movies_app/infrastructure/mappers/mappers.dart';
+import 'package:movies_app/infrastructure/infrastructure.dart';
 
 // Manage the languages of the movies state
 // get the mapper state

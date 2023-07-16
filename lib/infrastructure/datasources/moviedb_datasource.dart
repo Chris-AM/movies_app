@@ -3,10 +3,8 @@ import 'package:dio/dio.dart';
 //* Own Imports
 import 'package:movies_app/config/constants/environment.dart';
 import 'package:movies_app/domain/datasources/movies_datasource.dart';
-import 'package:movies_app/infrastructure/models/moviedb/movie_detail.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
-import 'package:movies_app/infrastructure/mappers/mappers.dart';
-import 'package:movies_app/infrastructure/models/moviedb/moviedb_response.dart';
+import 'package:movies_app/infrastructure/infrastructure.dart';
 
 class MovieDBDataSource extends MoviesDataSource {
   final Dio dio = Dio(

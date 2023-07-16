@@ -1,5 +1,5 @@
-import 'package:movies_app/domain/entities/entities.dart';
-import 'package:movies_app/infrastructure/models/moviedb/moviedb_actors.dart';
+import 'package:movies_app/domain/domain.dart';
+import 'package:movies_app/infrastructure/infrastructure.dart';
 
 class ActorMapper {
   static ActorEntity castToEntity(Cast cast) => ActorEntity(

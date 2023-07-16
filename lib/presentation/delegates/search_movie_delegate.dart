@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/config/helpers/human_formats.dart';
-import 'package:movies_app/domain/entities/movie_entity.dart';
+import 'package:movies_app/domain/domain.dart';
 
 typedef SearchMoviesCallBack = Future<List<MovieEntity>> Function(
     {String searchTerm, int movieLanguageIndex});

@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:movies_app/config/constants/environment.dart';
-import 'package:movies_app/domain/datasources/actors_datasource.dart';
-import 'package:movies_app/domain/entities/actor_entity.dart';
-import 'package:movies_app/infrastructure/mappers/actor_mapper.dart';
-import 'package:movies_app/infrastructure/models/moviedb/moviedb_actors.dart';
+import 'package:movies_app/domain/domain.dart';
+import 'package:movies_app/infrastructure/infrastructure.dart';
 
 class MovieDBActorsDataSource extends ActorsDataSource {
   final Dio dio = Dio(

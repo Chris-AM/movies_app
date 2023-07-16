@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //* Own Imports
-import 'package:movies_app/domain/entities/movie_entity.dart';
+import 'package:movies_app/domain/domain.dart';
 import 'package:movies_app/presentation/providers/providers.dart';
 import 'package:movies_app/presentation/widgets/widgets.dart';
 

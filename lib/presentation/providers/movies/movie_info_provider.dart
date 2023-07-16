@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movies_app/domain/entities/entities.dart';
+import 'package:movies_app/domain/domain.dart';
 import 'package:movies_app/presentation/providers/providers.dart';
 
 final movieInfoProvider =

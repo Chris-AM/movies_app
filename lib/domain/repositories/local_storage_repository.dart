@@ -1,4 +1,4 @@
-import 'package:movies_app/domain/entities/entities.dart';
+import 'package:movies_app/domain/domain.dart';
 
 abstract class LocalStorageRepository {
   Future<void> toggleFavorite(MovieEntity movie);
