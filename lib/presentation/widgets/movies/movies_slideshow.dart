@@ -70,7 +70,6 @@ class _Carrousel extends StatelessWidget {
                 fit: BoxFit.cover,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress != null) {
-                    // TODO: change pattern when loading
                     return const DecoratedBox(
                       decoration: BoxDecoration(color: Colors.black45),
                     );

@@ -73,7 +73,6 @@ class SearchMovieDelegate extends SearchDelegate<MovieEntity?> {
         stream: isLoadingStream.stream,
         builder: (context, snapshot) {
           if (snapshot.data ?? false) {
-            print('at if');
             return SpinPerfect(
               duration: const Duration(seconds: 20),
               spins: 10,

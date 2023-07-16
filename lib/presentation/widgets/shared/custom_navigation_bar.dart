@@ -10,7 +10,6 @@ class CustomNavigationBar extends StatelessWidget {
   });
 
   void onItemTapped(BuildContext context, int index) {
-    print('currentIndex: $index');
     switch (index) {
       case 0:
         context.go('/home/$index');
