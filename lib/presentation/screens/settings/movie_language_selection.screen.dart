@@ -60,13 +60,10 @@ class _LanguageSelectionView extends ConsumerWidget {
           onChanged: (value) {
             // Update the selected language index in the state
             ref.read(moviesLanguageIndexProvider.notifier).state = index;
-            // Update the movies state with the selected language
-            ref
-                .read(nowPlayingMoviesProvider.notifier)
-                .setMoviesLanguage(index);
-            ref.read(popularMoviesProvider.notifier).setMoviesLanguage(index);
-            ref.read(upComingMoviesProvider.notifier).setMoviesLanguage(index);
-            ref.read(topRatedMoviesProvider.notifier).setMoviesLanguage(index);
+            ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+            ref.read(popularMoviesProvider.notifier).loadNextPage();
+            ref.read(upComingMoviesProvider.notifier).loadNextPage();
+            ref.read(topRatedMoviesProvider.notifier).loadNextPage();
           },
         );
       },

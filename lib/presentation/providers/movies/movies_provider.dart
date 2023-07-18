@@ -88,9 +88,8 @@ class MoviesNotifier extends StateNotifier<List<MovieEntity>> {
     currentIndex =
         moviesLanguageIndex; // Set the current index to the selected index
     // Fetch the movies with the selected language
-    final List<MovieEntity> movieLanguagesToDisplay = await fetchMoreMovies(
-      currentIndex,
-    );
+    final List<MovieEntity> movieLanguagesToDisplay =
+        await fetchMoreMovies(moviesLanguageIndex);
     state = [
       ...movieLanguagesToDisplay
     ]; // Update the state with the movies with the selected language
