@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  devicelocale
   isar_flutter_libs
 )
 
