@@ -1,42 +1,11 @@
-//* Dart/Flutter imports
-import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-//* Own Imports
-import 'package:movies_app/presentation/providers/providers.dart';
+import 'package:flutter/material.dart';
+import '../../providers/providers.dart';
 
-// This is a stateless widget that displays the movie language selection screen
-class MovieLanguageSelectionScreen extends StatelessWidget {
-  static const String name =
-      'movie_language_selection'; // The name of the screen
-  final String title = 'Movie Language Selection'; // The title of the screen
-  const MovieLanguageSelectionScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _LanguageSelectionView(
-          title: title,
-        ), // Display the language selection view
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.pop();
-        },
-        child: Platform.isIOS
-            ? const Icon(Icons.arrow_back_ios_new_rounded)
-            : const Icon(Icons.arrow_back_rounded),
-      ),
-    );
-  }
-}
-
-// This is a consumer widget that displays the language selection view
-class _LanguageSelectionView extends ConsumerWidget {
+class LanguageSelectionView extends ConsumerWidget {
   final String title; // The title of the screen
-  const _LanguageSelectionView({
+  const LanguageSelectionView({
+    super.key,
     required this.title,
   });
 

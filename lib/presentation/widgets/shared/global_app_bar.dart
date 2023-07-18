@@ -67,7 +67,7 @@ class _IconsRow extends ConsumerWidget {
       children: [
         IconButton(
           onPressed: () {
-            context.push('/movie_language_selection');
+            context.push('/settings');
           },
           icon: showSettingsButton
               ? const Icon(

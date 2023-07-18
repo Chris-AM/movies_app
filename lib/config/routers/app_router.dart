@@ -25,9 +25,9 @@ final appRouter = GoRouter(
       ],
     ),
     GoRoute(
-      path: '/movie_language_selection',
+      path: '/settings',
       builder: (context, state) {
-        return const MovieLanguageSelectionScreen();
+        return const SettingsScreen();
       },
     ),
     //* Redirect
