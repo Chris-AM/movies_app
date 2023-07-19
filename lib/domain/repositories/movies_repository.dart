@@ -14,4 +14,6 @@ abstract class MoviesRepository {
   Future<List<MovieEntity>> searchMovies(String searchTerm);
 
   Future<List<VideoEntity>> getVideosFromYouTube(int movieId);
+
+  Future<List<MovieEntity>> getSimilarMovies(int movieId);
 }

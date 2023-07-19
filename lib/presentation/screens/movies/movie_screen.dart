@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movies_app/domain/domain.dart';
 import 'package:movies_app/presentation/providers/providers.dart';
+import 'package:movies_app/presentation/widgets/movies/similar_movies.dart';
 import 'package:movies_app/presentation/widgets/videos/videos_from_movie.dart';
 
 class MovieScreen extends ConsumerStatefulWidget {
@@ -125,6 +126,7 @@ class _MovieDetails extends StatelessWidget {
         _Genres(movie: movie),
         _CastByMovie(movieId: movie.id.toString()),
         VideosFromMovie(movieId: movie.id),
+        SimilarMovies(movieId: movie.id),
       ],
     );
   }

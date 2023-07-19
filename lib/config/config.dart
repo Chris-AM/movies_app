@@ -1,3 +1,5 @@
+//* Constants
+export 'constants/environment.dart';
 //* Routers
 export 'routers/app_router.dart';
 //* Theme

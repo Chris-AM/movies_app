@@ -41,4 +41,9 @@ class MovieRepositoryImpl extends MoviesRepository {
   Future<List<VideoEntity>> getVideosFromYouTube(int movieId) {
     return dataSource.getVideosFromYouTube(movieId);
   }
+
+  @override
+  Future<List<MovieEntity>> getSimilarMovies(int movieId) {
+    return dataSource.getSimilarMovies(movieId);
+  }
 }

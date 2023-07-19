@@ -3,7 +3,7 @@ import 'package:devicelocale/devicelocale.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 //* Own Imports
-import 'package:movies_app/config/constants/environment.dart';
+import 'package:movies_app/config/config.dart';
 import 'package:movies_app/domain/domain.dart';
 import 'package:movies_app/infrastructure/infrastructure.dart';
 
@@ -147,5 +147,17 @@ class MovieDBDataSource extends MoviesDataSource {
       }
     }
     return videos;
+  }
+
+  @override
+  Future<List<MovieEntity>> getSimilarMovies(int movieId) async {
+    final response = await dio.get(
+      '/movie/$movieId/similar',
+      queryParameters: {
+        'language': await _getMovieLanguage(),
+      },
+    );
+    final List<MovieEntity> movies = _moviesPetition(response.data);
+    return movies;
   }
 }
