@@ -20,6 +20,7 @@ class GlobalAppBar extends ConsumerWidget {
     final colors = Theme.of(context).colorScheme;
     final textStyle = Theme.of(context).textTheme;
     return SliverAppBar(
+      automaticallyImplyLeading: false,
       floating: true,
       flexibleSpace: FlexibleSpaceBar(
         title: SafeArea(
