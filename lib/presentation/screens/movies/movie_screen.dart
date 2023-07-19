@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movies_app/domain/domain.dart';
 import 'package:movies_app/presentation/providers/providers.dart';
+import 'package:movies_app/presentation/widgets/videos/videos_from_movie.dart';
 
 class MovieScreen extends ConsumerStatefulWidget {
   static const name = 'movie_screen';
@@ -21,7 +22,7 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   void initState() {
     super.initState();
     // final int movieLanguageIndex = ref.read(moviesLanguageIndexProvider);
-    ref.read(movieInfoProvider.notifier).loadMovie( widget.movieId);
+    ref.read(movieInfoProvider.notifier).loadMovie(widget.movieId);
     ref.read(castByMovieProvider.notifier).loadCast(widget.movieId);
   }
 
@@ -120,71 +121,98 @@ class _MovieDetails extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  movie.posterPath,
-                  width: size.width * .3,
-                ),
-              ),
-              const SizedBox(width: 10),
-              SizedBox(
-                width: (size.width - 40) * .7,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      movie.title,
-                      style: textStyle.titleMedium,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      movie.overview,
-                      style: textStyle.bodySmall,
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Wrap(
-            children: [
-              ...movie.genreIds.map(
-                (gender) => Container(
-                  margin: const EdgeInsets.only(
-                    right: 10,
-                  ),
-                  child: Chip(
-                    label: Text(gender),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        _CastByMovie(
-          movieId: movie.id.toString(),
-        ),
-        const SizedBox(
-          height: 50,
-        ),
+        _TitleAndOverview(movie: movie, size: size, textStyle: textStyle),
+        _Genres(movie: movie),
+        _CastByMovie(movieId: movie.id.toString()),
+        VideosFromMovie(movieId: movie.id),
       ],
+    );
+  }
+}
+
+class _Genres extends StatelessWidget {
+  const _Genres({
+    super.key,
+    required this.movie,
+  });
+
+  final MovieEntity movie;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Wrap(
+        children: [
+          ...movie.genreIds.map(
+            (gender) => Container(
+              margin: const EdgeInsets.only(
+                right: 10,
+              ),
+              child: Chip(
+                label: Text(gender),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TitleAndOverview extends StatelessWidget {
+  const _TitleAndOverview({
+    required this.movie,
+    required this.size,
+    required this.textStyle,
+  });
+
+  final MovieEntity movie;
+  final Size size;
+  final TextTheme textStyle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.network(
+              movie.posterPath,
+              width: size.width * .3,
+            ),
+          ),
+          const SizedBox(width: 10),
+          SizedBox(
+            width: (size.width - 40) * .7,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  movie.title,
+                  style: textStyle.titleMedium,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  movie.overview,
+                  style: textStyle.bodySmall,
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

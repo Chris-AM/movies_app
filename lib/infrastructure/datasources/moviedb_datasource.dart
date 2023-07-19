@@ -4,8 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 //* Own Imports
 import 'package:movies_app/config/constants/environment.dart';
-import 'package:movies_app/domain/datasources/movies_datasource.dart';
-import 'package:movies_app/domain/entities/movie_entity.dart';
+import 'package:movies_app/domain/domain.dart';
 import 'package:movies_app/infrastructure/infrastructure.dart';
 
 class MovieDBDataSource extends MoviesDataSource {
@@ -129,5 +128,24 @@ class MovieDBDataSource extends MoviesDataSource {
       throw Exception('Movie $searchTerm not found');
     }
     return _moviesPetition(response.data);
+  }
+
+  @override
+  Future<List<VideoEntity>> getVideosFromYouTube(int movieId) async {
+    final response = await dio.get(
+      '/movie/$movieId/videos',
+      queryParameters: {
+        'language': await _getMovieLanguage(),
+      },
+    );
+    final movieDBVideosResponse = MoviedbVideosResponse.fromJson(response.data);
+    final List<VideoEntity> videos = <VideoEntity>[];
+    for (final result in movieDBVideosResponse.results) {
+      if (result.site == 'YouTube') {
+        final video = VideoMapper.moviedbVideoToEntity(result);
+        videos.add(video);
+      }
+    }
+    return videos;
   }
 }

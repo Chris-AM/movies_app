@@ -6,6 +6,7 @@ export 'datasources/movies_datasource.dart';
 //? Entities
 export 'entities/actor_entity.dart';
 export 'entities/movie_entity.dart';
+export 'entities/video_entity.dart';
 
 //? repositories
 export 'repositories/actors_repository.dart';
