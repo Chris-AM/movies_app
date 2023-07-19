@@ -25,33 +25,21 @@ class _SettingsViewState extends State<SettingsView> {
             (context, index) {
               return Column(
                 children: [
-                  Theme(
-                    data: Theme.of(context).copyWith(
-                      dividerColor: Colors.transparent,
-                    ),
-                    child: ExpansionTile(
-                      title: const Text('Language Settings'),
-                      children: const [
-                        LanguageSelectionView(),
-                      ],
-                      onExpansionChanged: (bool expanded) {
-                        setState(() => isTileEnabled = expanded);
-                      },
-                    ),
+                  _ThemedExpansionTile(
+                    title: 'Language Settings',
+                    children: const [
+                      LanguageSelectionView(),
+                    ],
+                    onExpansionChanged: (value) =>
+                        setState(() => isTileEnabled = value),
                   ),
-                  Theme(
-                    data: Theme.of(context).copyWith(
-                      dividerColor: Colors.transparent,
-                    ),
-                    child: ExpansionTile(
-                      title: const Text('Theme Settings'),
-                      children: const [
-                        ThemeSelectionView(),
-                      ],
-                      onExpansionChanged: (bool expanded) {
-                        setState(() => isTileEnabled = expanded);
-                      },
-                    ),
+                  _ThemedExpansionTile(
+                    title: 'Theme Settings',
+                    children: const [
+                      ThemeSelectionView(),
+                    ],
+                    onExpansionChanged: (value) =>
+                        setState(() => isTileEnabled = value),
                   ),
                 ],
               );
@@ -60,6 +48,32 @@ class _SettingsViewState extends State<SettingsView> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ThemedExpansionTile extends StatelessWidget {
+  final String title;
+  final List<Widget> children;
+  final ValueChanged<bool> onExpansionChanged;
+
+  const _ThemedExpansionTile({
+    required this.title,
+    required this.children,
+    required this.onExpansionChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(
+        dividerColor: Colors.transparent,
+      ),
+      child: ExpansionTile(
+        title: Text(title),
+        onExpansionChanged: onExpansionChanged,
+        children: children,
+      ),
     );
   }
 }
