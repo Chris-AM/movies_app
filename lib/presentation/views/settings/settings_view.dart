@@ -39,6 +39,20 @@ class _SettingsViewState extends State<SettingsView> {
                       },
                     ),
                   ),
+                  Theme(
+                    data: Theme.of(context).copyWith(
+                      dividerColor: Colors.transparent,
+                    ),
+                    child: ExpansionTile(
+                      title: const Text('Theme Settings'),
+                      children: const [
+                        ThemeSelectionView(),
+                      ],
+                      onExpansionChanged: (bool expanded) {
+                        setState(() => isTileEnabled = expanded);
+                      },
+                    ),
+                  ),
                 ],
               );
             },

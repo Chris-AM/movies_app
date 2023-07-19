@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movies_app/config/config.dart';
 import 'package:movies_app/domain/entities/movie_entity.dart';
 import 'package:movies_app/presentation/delegates/delegates.dart';
 import 'package:movies_app/presentation/helpers/helpers.dart';
@@ -64,18 +65,25 @@ class _IconsRow extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bool isDarkMode = ref.watch(globalAppThemeProvider).isDarkMode;
     return Wrap(
       children: [
-        IconButton(
-          onPressed: () {
-            context.push('/settings');
-          },
-          icon: showSettingsButton
-              ? const Icon(
+        showSettingsButton
+            ? IconButton(
+                onPressed: () {
+                  context.push('/settings');
+                },
+                icon: const Icon(
                   Icons.settings_rounded,
-                )
-              : const SizedBox.shrink(),
-        ),
+                ))
+            : IconButton(
+                icon: isDarkMode
+                    ? const Icon(Icons.dark_mode_rounded)
+                    : const Icon(Icons.light_mode_rounded),
+                onPressed: () {
+                  ref.read(globalAppThemeProvider.notifier).toggleDarkMode();
+                },
+              ),
         IconButton(
           onPressed: () {
             final searchedMovies = ref.read(searchedMoviesProvider);

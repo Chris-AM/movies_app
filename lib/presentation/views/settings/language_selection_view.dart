@@ -24,10 +24,9 @@ class LanguageSelectionViewState extends ConsumerState<LanguageSelectionView> {
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, String> languagesMapState = ref.watch(
-        moviesLanguagesProvider); // Get the map of language names to codes from the state
-    final int selectedLanguage = ref.watch(
-        moviesLanguageIndexProvider); // Get the selected language index from the state
+    final Map<String, String> languagesMapState =
+        ref.watch(moviesLanguagesProvider);
+    final int selectedLanguage = ref.watch(moviesLanguageIndexProvider);
     return SizedBox(
       height: 300,
       child: Expanded(
@@ -35,10 +34,8 @@ class LanguageSelectionViewState extends ConsumerState<LanguageSelectionView> {
           child: ListView.builder(
             controller: scrollController,
             padding: EdgeInsets.zero,
-            itemCount: languagesMapState
-                .length, // Set the number of items to the length of the map
+            itemCount: languagesMapState.length,
             itemBuilder: (context, index) {
-              // Get the language name and code at the current index
               final entries = languagesMapState.entries.toList()[index];
               return LanguageRadioListTile(
                 languageNames: entries.key,
@@ -46,7 +43,6 @@ class LanguageSelectionViewState extends ConsumerState<LanguageSelectionView> {
                 selectedLanguage: selectedLanguage,
                 value: index,
                 onChanged: (value) {
-                  // Update the selected language index in the state
                   ref.read(moviesLanguageIndexProvider.notifier).state = index;
                   ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
                   ref.read(popularMoviesProvider.notifier).loadNextPage();

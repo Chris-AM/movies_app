@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //* Own Imports
-import 'package:movies_app/config/routers/app_router.dart';
-import 'package:movies_app/config/theme/app_theme.dart';
-import 'package:movies_app/config/theme/app_theme_provider.dart';
+import 'config/config.dart';
 
 // The main function is the entry point of the app.
 Future<void> main() async {
