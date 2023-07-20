@@ -2,6 +2,7 @@
 export 'datasources/isar_datasource.dart';
 export 'datasources/TMDB/moviedb_actors_datasource.dart';
 export 'datasources/TMDB/moviedb_datasource.dart';
+export 'datasources/helpers/get_movie_language.dart';
 //* Mappers
 export 'mappers/actor_mapper.dart';
 export 'mappers/moviedb_mapper.dart';
@@ -13,7 +14,9 @@ export 'models/moviedb/moviedb_actors.dart';
 export 'models/moviedb/moviedb_response.dart';
 export 'models/moviedb/moviedb_result.dart';
 export 'models/moviedb/moviedb_videos.dart';
+export 'models/moviedb/moviedb_genres_response.dart';
 //* Repositories impl
 export 'repositories/local_storage_repository_impl.dart';
-export 'repositories/moviedb_cast_repository_impl.dart';
-export 'repositories/moviedb_repository_impl.dart';
+export 'repositories/TMDB/moviedb_cast_repository_impl.dart';
+export 'repositories/TMDB/moviedb_repository_impl.dart';
+export 'repositories/TMDB/moviedb_genre_repository_impl.dart';
