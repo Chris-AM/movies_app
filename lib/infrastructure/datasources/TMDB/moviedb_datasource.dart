@@ -10,14 +10,7 @@ import 'package:movies_app/infrastructure/infrastructure.dart';
 class MovieDBDataSource extends MoviesDataSource {
   final int movieLanguageIndex;
 
-  final Dio dio = Dio(
-    BaseOptions(
-      baseUrl: 'http://api.themoviedb.org/3',
-      queryParameters: {
-        'api_key': Environment.tmdbKey,
-      },
-    ),
-  );
+  final Dio dio = Environment.globalDio;
 
   MovieDBDataSource(this.movieLanguageIndex);
 
