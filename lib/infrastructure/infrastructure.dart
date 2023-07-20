@@ -1,7 +1,7 @@
 //* Datasources impl
 export 'datasources/isar_datasource.dart';
-export 'datasources/moviedb_actors_datasource.dart';
-export 'datasources/moviedb_datasource.dart';
+export 'datasources/TMDB/moviedb_actors_datasource.dart';
+export 'datasources/TMDB/moviedb_datasource.dart';
 //* Mappers
 export 'mappers/actor_mapper.dart';
 export 'mappers/moviedb_mapper.dart';
