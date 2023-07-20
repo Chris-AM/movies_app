@@ -1,7 +1,5 @@
 //* Flutter Imports
-import 'package:devicelocale/devicelocale.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 //* Own Imports
 import 'package:movies_app/config/config.dart';
 import 'package:movies_app/domain/domain.dart';
@@ -23,27 +21,14 @@ class MovieDBDataSource extends MoviesDataSource {
     return movies;
   }
 
-  Future<String> _getMovieLanguage() async {
-    // if(movieLanguageIndex)
-    List<Locale?> locale = await Devicelocale.preferredLanguagesAsLocales;
-
-    final String movieLanguage =
-        moviesLanguagesMapper.values.toList()[movieLanguageIndex];
-    final String language = locale[0].toString().replaceAll('_', '-');
-    final String deviceLanguage = moviesLanguagesMapper.values.toList()[0];
-    if (movieLanguage == deviceLanguage) {
-      return language;
-    }
-    return movieLanguage;
-  }
-
   @override
   Future<List<MovieEntity>> getNowPlaying(int page) async {
     final response = await dio.get(
       '/movie/now_playing',
       queryParameters: {
         'page': page,
-        'language': await _getMovieLanguage(),
+        'language':
+            await GetMovieLanguageHelper.getMovieLanguage(movieLanguageIndex),
       },
     );
     final List<MovieEntity> movies = _moviesPetition(response.data);
@@ -56,7 +41,8 @@ class MovieDBDataSource extends MoviesDataSource {
       '/movie/popular',
       queryParameters: {
         'page': page,
-        'language': await _getMovieLanguage(),
+        'language':
+            await GetMovieLanguageHelper.getMovieLanguage(movieLanguageIndex),
       },
     );
     final List<MovieEntity> movies = _moviesPetition(response.data);
@@ -69,7 +55,8 @@ class MovieDBDataSource extends MoviesDataSource {
       '/movie/upcoming',
       queryParameters: {
         'page': page,
-        'language': await _getMovieLanguage(),
+        'language':
+            await GetMovieLanguageHelper.getMovieLanguage(movieLanguageIndex),
       },
     );
     final List<MovieEntity> movies = _moviesPetition(response.data);
@@ -82,7 +69,8 @@ class MovieDBDataSource extends MoviesDataSource {
       '/movie/top_rated',
       queryParameters: {
         'page': page,
-        'language': await _getMovieLanguage(),
+        'language':
+            await GetMovieLanguageHelper.getMovieLanguage(movieLanguageIndex),
       },
     );
     final List<MovieEntity> movies = _moviesPetition(response.data);
@@ -94,7 +82,8 @@ class MovieDBDataSource extends MoviesDataSource {
     final response = await dio.get(
       '/movie/$movieId',
       queryParameters: {
-        'language': await _getMovieLanguage(),
+        'language':
+            await GetMovieLanguageHelper.getMovieLanguage(movieLanguageIndex),
       },
     );
     if (response.statusCode != 200) {
@@ -114,7 +103,8 @@ class MovieDBDataSource extends MoviesDataSource {
       '/search/movie',
       queryParameters: {
         'query': searchTerm,
-        'language': _getMovieLanguage(),
+        'language':
+            await GetMovieLanguageHelper.getMovieLanguage(movieLanguageIndex),
       },
     );
     if (response.statusCode != 200) {
@@ -128,7 +118,8 @@ class MovieDBDataSource extends MoviesDataSource {
     final response = await dio.get(
       '/movie/$movieId/videos',
       queryParameters: {
-        'language': await _getMovieLanguage(),
+        'language':
+            await GetMovieLanguageHelper.getMovieLanguage(movieLanguageIndex),
       },
     );
     final movieDBVideosResponse = MoviedbVideosResponse.fromJson(response.data);
@@ -147,7 +138,8 @@ class MovieDBDataSource extends MoviesDataSource {
     final response = await dio.get(
       '/movie/$movieId/similar',
       queryParameters: {
-        'language': await _getMovieLanguage(),
+        'language':
+            await GetMovieLanguageHelper.getMovieLanguage(movieLanguageIndex),
       },
     );
     final List<MovieEntity> movies = _moviesPetition(response.data);
