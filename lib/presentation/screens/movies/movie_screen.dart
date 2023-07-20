@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movies_app/domain/domain.dart';
 import 'package:movies_app/presentation/providers/providers.dart';
 import 'package:movies_app/presentation/widgets/movies/similar_movies.dart';
@@ -52,8 +53,14 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
               ),
               childCount: 1,
             ),
-          )
+          ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.go('/home/0');
+        },
+        child: const Icon(Icons.home_max_rounded),
       ),
     );
   }
