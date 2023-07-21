@@ -12,20 +12,25 @@ class MovieDBDiscoverDatasource extends DiscoverDatasource {
   List<MovieEntity> _moviesPetition(Map<String, dynamic> response) {
     final TmdbResponse tmdbResponse = TmdbResponse.fromJson(response);
     final List<MovieEntity> movies = tmdbResponse.results
-        .where((movie) => movie.posterPath != 'no-poset')
+        .where((movie) => movie.posterPath != 'no-post')
         .map((movie) => TMDBMapper.movieDBToEntity(movie))
         .toList();
     return movies;
   }
 
   @override
-  Future<List<MovieEntity>> getMovieByGenreId(int genreId) async {
+  Future<List<MovieEntity>> getMovieByGenreId({
+    required int genreId,
+    required int page,
+  }) async {
     final response = await dio.get(
       '/discover/movie',
       queryParameters: {
         'with_genres': genreId,
+        'page': page,
       },
     );
+
     final List<MovieEntity> movies = _moviesPetition(response.data);
     return movies;
   }

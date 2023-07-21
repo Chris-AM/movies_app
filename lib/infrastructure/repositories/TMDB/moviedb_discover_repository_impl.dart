@@ -6,7 +6,13 @@ class MovieDBDiscoverRepositoryImpl extends DiscoverRepository {
   MovieDBDiscoverRepositoryImpl(this.dataSource);
 
   @override
-  Future<List<MovieEntity>> getMovieByGenreId(int genreId) {
-    return dataSource.getMovieByGenreId(genreId);
+  Future<List<MovieEntity>> getMovieByGenreId({
+    required int genreId,
+    required int page,
+  }) {
+    return dataSource.getMovieByGenreId(
+      genreId: genreId,
+      page: page,
+    );
   }
 }
