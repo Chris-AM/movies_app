@@ -1,5 +1,6 @@
 //? Domain
 export 'datasources/actors_datasource.dart';
+export 'datasources/discover_datasource.dart';
 export 'datasources/local_storage_datasource.dart';
 export 'datasources/movies_datasource.dart';
 export 'datasources/genres_datasource.dart';
@@ -12,5 +13,6 @@ export 'entities/genres_entity.dart';
 
 //? repositories
 export 'repositories/actors_repository.dart';
+export 'repositories/discover_repository.dart';
 export 'repositories/local_storage_repository.dart';
 export 'repositories/movies_repository.dart';
