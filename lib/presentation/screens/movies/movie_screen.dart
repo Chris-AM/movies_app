@@ -141,7 +141,6 @@ class _MovieDetails extends StatelessWidget {
 
 class _Genres extends StatelessWidget {
   const _Genres({
-    super.key,
     required this.movie,
   });
 
