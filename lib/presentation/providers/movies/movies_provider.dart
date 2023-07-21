@@ -84,14 +84,5 @@ class MoviesNotifier extends StateNotifier<List<MovieEntity>> {
   }
 
   // This method sets the language of the movies to display
-  Future<void> setMoviesLanguage(int moviesLanguageIndex) async {
-    currentIndex =
-        moviesLanguageIndex; // Set the current index to the selected index
-    // Fetch the movies with the selected language
-    final List<MovieEntity> movieLanguagesToDisplay =
-        await fetchMoreMovies(moviesLanguageIndex);
-    state = [
-      ...movieLanguagesToDisplay
-    ]; // Update the state with the movies with the selected language
-  }
+  
 }
