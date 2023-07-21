@@ -22,7 +22,7 @@ class MovieDBGenresDatasource extends GenresDatasource {
   @override
   Future<List<GenresEntity>> getGenres() async {
     final response = await dio.get(
-      '/genre/movie',
+      '/genre/movie/list',
       queryParameters: {
         'language':
             await GetMovieLanguageHelper.getMovieLanguage(movieLanguageIndex),

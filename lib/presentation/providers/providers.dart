@@ -1,6 +1,9 @@
 //* Cast
 export 'cast/cast_by_movie_provider.dart';
 export 'cast/cast_repository_provider.dart';
+//* Genres
+export 'categories/movie_genres_provider.dart';
+export 'categories/categories_repository_provider.dart';
 //* Movies
 export 'movies/app_initial_load_provider.dart';
 export 'movies/movie_info_provider.dart';

@@ -2,6 +2,7 @@
 export 'datasources/isar_datasource.dart';
 export 'datasources/TMDB/moviedb_actors_datasource.dart';
 export 'datasources/TMDB/moviedb_datasource.dart';
+export 'datasources/TMDB/moviedb_genres_datasourse.dart';
 export 'datasources/helpers/get_movie_language.dart';
 //* Mappers
 export 'mappers/actor_mapper.dart';

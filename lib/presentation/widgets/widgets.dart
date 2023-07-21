@@ -1,4 +1,5 @@
 //* Movies
+export 'movies/categories_grid_view.dart';
 export 'movies/fav_movies_grid_view.dart';
 export 'movies/movie_poster_link.dart';
 export 'movies/movies_horizontal_listview.dart';
